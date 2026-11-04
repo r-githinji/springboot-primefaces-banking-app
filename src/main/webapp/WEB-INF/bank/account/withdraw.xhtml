@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" 
+	xmlns:ui="jakarta.faces.facelets"
+	xmlns:p="primefaces" 
+	template="../../layout/template.xhtml">
+	<f:metadata>
+		<f:viewAction action="#{withdrawBean.init}" />
+	</f:metadata>
+	<ui:define name="page-title">
+		<h:outputText value="Withdraw" />
+	</ui:define>
+	<ui:define name="page-content">
+		<h:form>
+			<p:tooltip />
+			<p:outputPanel styleClass="flex flex-wrap md:w-7 w-full gap-2 p-3 ui-fluid">
+				<h3>WITHDRAW FUNDS</h3>
+				<div class="flex flex-column gap-1 w-12">
+	                <p:outputLabel value="Account" for="@next" styleClass="text-sm" />
+					<p:autoComplete value="#{withdrawBean.withdraw.source}" var="customer" itemLabel="#{customer.name}" itemValue="#{customer}" 
+						completeMethod="#{applicationBean.filterCustomer}" maxResults="#{5}" converter="jebus.converter.customer"
+						moreText="more customers available" cache="#{false}" forceSelection="#{true}">
+					</p:autoComplete>
+					<p:message for="@previous" display="tooltip" />
+				</div>
+				
+				<div class="w-12" />
+				<div class="flex flex-column gap-1 w-12">
+					<p:outputLabel value="Amount" for="@next" styleClass="text-sm" />
+					<p:inputText value="#{withdrawBean.withdraw.amount.value}" validator="#{withdrawBean.checkWithdrawAmount}">
+					</p:inputText>
+					<p:message for="@previous" display="tooltip" />
+				</div>
+				
+				<div class="w-12" />
+				<div class="flex gap-2 mt-3">
+					<p:commandButton value="WITHDRAW" action="#{withdrawBean.withdrawFund}" ajax="#{false}" icon="pi pi-check-circle text-sm" styleClass="text-sm" />
+				</div>
+			</p:outputPanel>
+		</h:form>
+	</ui:define>
+</ui:composition>

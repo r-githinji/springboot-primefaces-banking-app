@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" 
+	xmlns:ui="jakarta.faces.facelets"
+	xmlns:p="primefaces" 
+	template="../../layout/template.xhtml">
+	<f:metadata>
+		<f:viewAction action="#{customerBean.init}" />
+	</f:metadata>
+	<ui:define name="page-title">
+		<h:outputText value="Open Account" />
+	</ui:define>
+	<ui:define name="page-content">
+		<h:form>
+			<p:tooltip />
+			<p:outputPanel styleClass="flex flex-wrap md:w-7 w-full gap-2 md:p-3 p-2">
+				<h3>OPEN ACCOUNT</h3>
+				<div class="flex flex-nowrap gap-4 w-full ui-fluid">
+					<div class="flex flex-column gap-1 w-6">
+						<p:outputLabel value="First Name" styleClass="text-sm" />
+						<p:inputText value="#{customerBean.customer.firstName}">
+						</p:inputText>
+						<p:message for="@previous" display="tooltip" />
+					</div>
+					<div class="flex flex-column gap-1 w-6">
+						<p:outputLabel value="Last Name" styleClass="text-sm" />
+						<p:inputText value="#{customerBean.customer.lastName}">
+						</p:inputText>
+						<p:message for="@previous" display="tooltip" />
+					</div>
+				</div>
+				<div class="w-12" />
+				<div class="flex flex-column gap-1 w-12">
+					<p:outputLabel value="Email" styleClass="text-sm" />
+					<p:inputText value="#{customerBean.customer.email}">
+					</p:inputText>
+					<p:message for="@previous" display="tooltip" />
+				</div>
+				<div class="w-12" />
+				<div class="flex flex-column gap-1 w-12 ui-fluid">
+					<p:outputLabel value="Birth Date" styleClass="text-sm" />
+					<p:datePicker value="#{customerBean.customer.birthDate}" validator="#{customerBean.checkDateOfBirth}" 
+						monthNavigator="#{true}" yearNavigator="#{true}" showWeek="#{true}">
+					</p:datePicker>
+					<p:message for="@previous" display="tooltip" />
+				</div>
+				<div class="w-12" />
+				<div class="flex flex-column gap-1 w-12">
+					<p:outputLabel value="Phone" styleClass="text-sm" />
+					<p:inputText value="#{customerBean.customer.phoneNumber}">
+					</p:inputText>
+					<p:message for="@previous" display="tooltip" />
+				</div>	
+				<div class="w-12" />
+				<div class="flex gap-2 mt-3">
+					<p:commandButton value="CREATE" action="#{customerBean.create}" ajax="#{false}" icon="pi pi-check-circle text-sm" styleClass="text-sm" size="small" />
+					<p:commandButton value="CANCEL" icon="pi pi-times text-sm" styleClass="ui-button-danger text-sm" size="small" />
+				</div>			
+			</p:outputPanel>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" 
+	xmlns:ui="jakarta.faces.facelets"
+	xmlns:p="primefaces" 
+	template="../../layout/template.xhtml">
+	<f:metadata>
+		<f:viewAction action="#{viewCustomerBean.init}" />
+	</f:metadata>
+	<ui:define name="page-title">
+		<h:outputText value="View Account" />
+	</ui:define>
+	<ui:define name="page-content">
+		<p:outputPanel styleClass="flex flex-wrap gap-4 p-3">
+			<div class="flex flex-row flex-wrap w-12">
+				<strong class="w-3">Id:</strong>
+				<h:outputText value="#{viewCustomerBean.customer.id}" />
+				<div class="w-12" />
+				<strong class="w-3">Reference:</strong>
+				<h:outputText value="#{viewCustomerBean.customer.reference}" />
+				<div class="w-12" />
+				<strong class="w-3">Name:</strong>
+				<h:outputFormat value="{0} {1}">
+					<f:param value="#{viewCustomerBean.customer.firstName}" />
+					<f:param value="#{viewCustomerBean.customer.lastName}" />
+				</h:outputFormat>
+				<div class="w-12" />
+				<strong class="w-3">Birth Date:</strong>
+				<h:outputText value="#{viewCustomerBean.customer.birthDate}">
+					<f:convertDateTime binding="#{applicationBean.dateConverter}" />
+				</h:outputText>
+				<div class="w-12" />
+				<strong class="w-3">Email:</strong>
+				<h:outputText value="#{viewCustomerBean.customer.email}" />
+				<div class="w-12" />
+				<strong class="w-3">Phone:</strong>
+				<h:outputText value="#{viewCustomerBean.customer.phoneNumber}" />
+				<div class="w-12" />
+			</div>
+			
+			<div class="flex flex-row flex-wrap w-12">
+				<strong class="w-3">Balance:</strong>
+				<h:outputText value="#{viewCustomerBean.account.balance}" />
+				<div class="w-12" />
+			</div>
+		</p:outputPanel>
+		
+		<p:outputPanel rendered="#{empty viewCustomerBean.entries}" styleClass="border-2 surface-border border-dotted p-4 mt-4 border-round m-2 flex justify-content-center">
+			<h3>NO TRANSACTIONS TO DISPLAY</h3>
+		</p:outputPanel>
+		
+		<p:dataTable rendered="#{not empty viewCustomerBean.entries}" var="entry" value="#{viewCustomerBean.entries}">
+			<f:facet name="header">
+				<p:outputPanel styleClass="inline-flex align-items-center gap-2">
+					<i class="pi pi-history" />
+					<h:outputText value="RECENT TRANSACTIONS" />
+				</p:outputPanel>
+			</f:facet>
+			<p:column headerText="Timestamp" field="created" filterable="#{false}">
+				<div class="flex align-items-center gap-2">
+					<h:outputText value="#{entry.created}">
+						<f:convertDateTime binding="#{applicationBean.dateConverter}" />
+					</h:outputText>
+					<h:outputText value="#{entry.created}" styleClass="font-light text-xs">
+						<f:convertDateTime binding="#{applicationBean.timeConverter}" />
+					</h:outputText>
+				</div>
+			</p:column>
+			<p:column field="source" filterable="#{false}" sortable="#{false}" styleClass="w-6rem text-center">
+				<h:outputText value="#{entry.journal.source.label}" />
+			</p:column>
+			<p:column field="type" filterable="#{false}" sortable="#{false}" styleClass="w-6rem text-center">
+				<f:facet name="header">
+					<h:outputText value="DR/CR" />
+				</f:facet>
+				<div class="inline-flex gap-2 align-items-center">
+					<i class="#{entry.type.value eq 'DR' ? 'pi pi-minus' : 'pi pi-plus'} font-light text-sm" />
+					<h:outputText value="#{entry.type.value}" styleClass="text-sm" />
+				</div>
+			</p:column>
+			<p:column field="amount" filterable="#{false}" sortable="#{false}"  styleClass="w-6rem text-center">
+				<h:outputText value="#{entry.amount}">
+					<f:convertNumber binding="#{applicationBean.currencyConverter}" />
+				</h:outputText>
+			</p:column>
+			<p:column field="balance" filterable="#{false}" sortable="#{false}" styleClass="w-6rem text-center">
+				<h:outputText value="#{entry.balance}">
+					<f:convertNumber binding="#{applicationBean.currencyConverter}" />
+				</h:outputText>
+			</p:column>
+		</p:dataTable>
+	</ui:define>
+</ui:composition>

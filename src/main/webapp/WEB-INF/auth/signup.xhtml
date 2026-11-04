@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" 
+	xmlns:ui="jakarta.faces.facelets"
+	xmlns:p="primefaces"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:df="http://xmlns.jcp.org/jsf/composite/cc">
+    <h:head>
+        <title>Sign up</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="mobile-web-app-capable" content="yes"/>
+        <link rel="icon" />
+    </h:head>
+    <h:body styleClass="m-0 p-0">
+	
+        <h:outputStylesheet library="webjars" name="primeflex/3.2.0/primeflex.min.css" />
+        <h:outputStylesheet library="css" name="globals.css" />
+		
+		<main class="flex md:justify-content-center align-items-center overflow h-screen w-screen surface-hover">
+			
+			<p:outputPanel styleClass="md:w-7 w-full border-noround md:border-round md:shadow-4 shadow-none md:surface-card">
+				
+				<h:form styleClass="relative md:p-4 p-6 ui-fluid flex-grow-1">
+					<p:growl id="growler" globalOnly="#{true}" />
+					<p:tooltip />
+					<div class="text-center mt-3 mb-2">
+	                    <div class="text-900 text-2xl font-bold mb-3">Create Account</div>
+	                    <span class="text-600 font-medium line-height-3">Already have an account?</span>
+	                    <p:link href="#{request.contextPath}/auth/signin" styleClass="font-light no-underline ml-2 text-blue-500 cursor-pointer">
+	                        <h:outputText value="Login" styleClass="text-sm" />
+	                    </p:link>
+	                </div>
+	                
+					<div>
+						<div class="ui-input-icon-right w-full mb-5">
+	                        <i class="pi pi-user z-1" />
+	                        <span class="ui-float-label">
+	                            <p:message for="@next" display="tooltip" />
+	                            <p:inputText value="#{signupBean.user.name}" required="#{true}" autocomplete="off" requiredMessage="Enter name" />
+	                            <p:outputLabel for="@previous" value="Name" />				                	
+	                        </span>                  
+	                    </div>
+	                    <div class="ui-input-icon-right w-full mb-5">
+	                        <i class="pi pi-at z-1" />
+	                        <span class="ui-float-label">
+	                            <p:message for="@next" display="tooltip" />
+	                            <p:inputText value="#{signupBean.user.username}" required="#{true}" autocomplete="off" requiredMessage="Enter a valid email" 
+	                            	validator="#{signupBean.checkUsername}">
+	                            	<p:ajax process="@this" />
+	                           	</p:inputText>
+	                            <p:outputLabel for="@previous" value="Email" />				                	
+	                        </span>                  
+	                    </div>
+	                    
+	                    <div class="ui-input-icon-right w-full mb-5">
+	                        <i class="pi pi-lock z-1" />
+	                        <span class="ui-float-label">
+	                            <p:message for="@next" display="tooltip" />
+	                            <p:password value="#{signupBean.user.password}" autocomplete="off">
+	                            	<p:ajax process="@this" />
+	                            </p:password>
+	                            <p:outputLabel for="@previous" value="Password" />				                	
+	                        </span>                  
+	                    </div>
+	                    
+	                    <div class="ui-input-icon-right w-full mb-5">
+	                        <i class="pi pi-lock z-1" />
+	                        <span class="ui-float-label">
+                            	<p:message for="@next" display="tooltip" />
+	                            <p:password value="#{signupBean.confirm}" autocomplete="off" validator="#{signupBean.checkConfirmPassword}" />
+	                            <p:outputLabel for="@previous" value="Confirm password" />				                	
+	                        </span>                  
+	                    </div>
+											
+						<div class="flex flex-column col-12">
+							<p:commandButton value="Signup" process="@this @form" update="@form growler" action="#{signupBean.register}" icon="pi pi-check-circle">
+							</p:commandButton>
+						</div>
+						
+					</div>
+				</h:form>
+				
+			</p:outputPanel>
+			
+		</main>
+				
+	</h:body>
+</html>

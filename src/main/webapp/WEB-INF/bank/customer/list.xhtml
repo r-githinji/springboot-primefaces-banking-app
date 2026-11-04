@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" 
+	xmlns:ui="jakarta.faces.facelets"
+	xmlns:p="primefaces" 
+	template="../../layout/template.xhtml">
+	<ui:define name="page-title">
+		<h:outputText value="View Accounts" />
+	</ui:define>
+	<ui:define name="page-content">
+		<div class="my-2 hidden">
+			<p:button href="#{request.contextPath}/bank/account/open" icon="pi pi-user-plus" value="Open Account">
+			</p:button>
+		</div>
+		<p:dataTable value="#{customerListBean.customers}" var="customer" lazy="#{true}" rows="#{customerListBean.rows}" paginator="#{true}"  
+			emptyMessage="No Rows Available" paginatorAlwaysVisible="#{false}" paginatorPosition="bottom" rowSelectMode="checkbox" 
+			currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			sortMode="single" allowUnsorting="#{false}">
+			<p:column headerText="Account" field="reference" filterable="#{false}" styleClass="w-10rem">
+				<h:outputText value="#{customer.reference}">
+				</h:outputText>
+			</p:column>
+			<p:column field="name" filterable="#{false}">
+				<h:outputText value="#{customer.name}">
+				</h:outputText>
+			</p:column>
+			<p:column rendered="#{false}" field="email" filterable="#{false}">
+				<h:outputText value="#{customer.email}">
+				</h:outputText>
+			</p:column>
+			<p:column rendered="#{false}" headerText="Phone" field="phoneNumber" filterable="#{false}">
+				<h:outputText value="#{customer.phoneNumber}">
+				</h:outputText>
+			</p:column>
+			<p:column rendered="#{false}" field="birthDate" filterable="#{false}" styleClass="w-8rem text-center">
+				<h:outputText value="#{customer.birthDate}">
+					<f:convertDateTime binding="#{applicationBean.dateConverter}" />				
+				</h:outputText>
+			</p:column>			
+			<p:column rendered="#{false}" field="deposits" filterable="#{false}" styleClass="w-8rem text-center">
+				<h:outputText value="#{customer.deposits}">
+					<f:convertNumber binding="#{applicationBean.currencyConverter}" />				
+				</h:outputText>
+			</p:column>
+			<p:column rendered="#{false}" field="withdrawals" filterable="#{false}" styleClass="w-8rem text-center">
+				<h:outputText value="#{customer.withdrawals}">
+					<f:convertNumber binding="#{applicationBean.currencyConverter}" />				
+				</h:outputText>
+			</p:column>
+			<p:column field="balance" filterable="#{false}" styleClass="w-8rem text-center">
+				<h:outputText value="#{customer.balance}">
+					<f:convertNumber binding="#{applicationBean.currencyConverter}" />				
+				</h:outputText>
+			</p:column>
+			<p:column styleClass="w-2rem text-center">
+				<f:facet name="header">
+					<i class="pi pi-eye" />
+				</f:facet>
+				<p:button href="#{request.contextPath}/bank/account/#{customer.id}" icon="pi pi-search" 
+					styleClass="ui-button-flat rounded-button raised-button" size="small">								
+				</p:button>
+			</p:column>
+		</p:dataTable>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="4.0"
+	xmlns="https://jakarta.ee/xml/ns/jakartaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_4_0.xsd ">
+	
+	<application>
+		<el-resolver>
+			org.springframework.web.jsf.el.SpringBeanFacesELResolver
+		</el-resolver>
+		<view-handler>
+			com.jebus.webclient.JebusViewHandler
+		</view-handler>
+		<navigation-handler>
+			com.jebus.webclient.JebusNavigationHandler
+		</navigation-handler>
+	</application>
+	
+	<navigation-rule>
+		<from-view-id>/WEB-INF/bank/account/deposit.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>depositSuccess</from-outcome>
+			<to-view-id>/dialog/deposit-success</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/WEB-INF/bank/account/withdraw.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>withdrawSuccess</from-outcome>
+			<to-view-id>/dialog/withdraw-success</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/WEB-INF/bank/account/transfer.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>transferSuccess</from-outcome>
+			<to-view-id>/dialog/transfer-success</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+		
+	<!--application>
+		<action-listener>
+	        org.primefaces.application.DialogActionListener
+	    </action-listener>
+	    <navigation-handler>
+	        org.primefaces.application.DialogNavigationHandler
+	    </navigation-handler>
+	    <view-handler>
+	        org.primefaces.application.DialogViewHandler
+	    </view-handler>
+    </application-->
+</faces-config>

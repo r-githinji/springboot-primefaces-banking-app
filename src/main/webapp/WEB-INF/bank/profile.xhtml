@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" 
+	xmlns:ui="jakarta.faces.facelets"
+	xmlns:p="primefaces" 
+	template="../layout/template.xhtml">
+
+	<ui:define name="page-content">
+
+		<p:outputPanel styleClass="bg-surface-0 dark:bg-surface-950 px-2 md:px-20 py-12 md:py-20 lg:px-80">
+            <div class="flex flex-column gap-4 mt-4">
+                
+               	<h3>PROFILE INFORMATION</h3>
+
+                <div class="flex flex-column gap-4">
+                    <div class="flex align-items-center gap-4 flex-grow-1">
+                        <div class="w-[140px] text-surface-900 dark:text-surface-0 font-medium text-base leading-tight">Name:</div>
+                        <div class="flex-grow-1 text-surface-900 dark:text-surface-0 text-base leading-tight">
+                        	<h:outputText value="#{profileBean.user.name}" />
+                        </div>
+                    </div>
+
+                    <div class="border-top border-surface-200 dark:border-surface-700"></div>
+
+                    
+                    <div class="flex align-items-center gap-4 flex-grow-1">
+                        <div class="w-[140px] text-surface-900 dark:text-surface-0 font-medium text-base leading-tight">Role(s):</div>
+                        <div class="flex-grow-1 flex flex-wrap gap-2">
+                        	<ui:repeat var="role" value="#{profileBean.user.roles}" varStatus="rolwStatus">
+                        		<p:chip label="#{role.type.label}" severity="secondary"></p:chip>
+                        	</ui:repeat>
+                        </div>
+                    </div>                    
+
+                    <div class="border-top border-surface-200 dark:border-surface-700"></div>
+                    
+                    <div class="flex align-items-center gap-4 flex-grow-1">
+                        <div class="text-surface-900 dark:text-surface-0 font-medium text-base leading-tight">User name:</div>
+                        <div class="flex-grow-1 text-surface-900 dark:text-surface-0 text-base leading-tight">
+                        	<h:outputText value="#{profileBean.user.username}" />
+                        </div>
+                    </div>
+
+                    <div class="border-top border-surface-200 dark:border-surface-700"></div>
+
+                    <div class="flex flex-column justify-content-center md:align-items-center md:flex-row gap-4">
+                        <div class="flex align-items-center gap-4 flex-grow-1">
+                            <div class="text-surface-900 dark:text-surface-0 font-medium text-base leading-tight">Password:</div>
+                            <div class="flex-grow-1 text-surface-900 dark:text-surface-0 text-base leading-tight">
+                            	************
+                            </div>
+                        </div>
+                        <div class="flex justify-end">
+                            <p:button styleClass="rounded-button shrink-0" icon="pi pi-pen-to-square" severity="secondary" size="small">
+                            </p:button>
+                        </div>
+                    </div>
+
+                    <div class="border-top border-surface-200 dark:border-surface-700"></div>
+                </div>
+            </div>
+        </p:outputPanel>
+		
+	</ui:define>
+</ui:composition>

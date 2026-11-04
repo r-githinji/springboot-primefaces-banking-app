@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="jakarta.faces.html"
+	xmlns:p="primefaces">
+    <h:head>
+        <title>Login</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="mobile-web-app-capable" content="yes"/>
+        <link rel="icon" />
+    </h:head>
+    <h:body styleClass="m-0 p-0">
+    	
+        <h:outputStylesheet library="webjars" name="primeflex/3.2.0/primeflex.min.css" />
+        <h:outputStylesheet library="css" name="globals.css" />	
+        
+        <main class="flex md:justify-content-center align-items-center overflow h-screen w-screen surface-hover">
+        
+            <p:outputPanel styleClass="md:w-7 w-full border-noround md:border-round md:shadow-4 shadow-none md:surface-card">
+                
+                <h:form prependId="#{false}" styleClass="relative md:p-4 p-6 ui-fluid flex-grow-1">
+                	<p:tooltip />
+                    <div class="text-center mb-5">
+                        <div class="text-900 text-2xl font-bold mb-3">Welcome Back</div>
+                        <span class="text-600 font-medium line-height-3">Don't have an account?</span>
+                        <p:link href="#{request.contextPath}/auth/signup" styleClass="font-light no-underline ml-2 text-blue-500 cursor-pointer">
+                            <h:outputText value="Create account" styleClass="text-sm" />
+                        </p:link>
+                    </div>
+
+                    <div>
+                        <div class="ui-input-icon-right w-full mb-5">
+                            <i class="pi pi-user z-1" />
+                            <span class="ui-float-label">
+                                <p:message for="@next" display="tooltip" />
+                                <p:inputText id="username" required="#{true}" autocomplete="off" requiredMessage="Enter username" />
+                                <p:outputLabel for="@previous" value="Username" />				                	
+                            </span>                  
+                        </div> 
+
+                        <div class="ui-input-icon-right w-full mb-4">
+                            <i class="pi pi-unlock z-1" />
+                            <span class="ui-float-label">
+                                <p:message for="@next" display="tooltip" />
+                                <p:password id="password" feedback="#{false}" autocomplete="off" required="#{true}" requiredMessage="Enter password" />	
+                                <p:outputLabel for="@previous" value="Password" />			                	
+                            </span>               
+                        </div>
+
+                        <div class="flex flex-row flex-wrap align-items-center justify-content-between mb-5 gap-3">
+                            <div class="flex align-items-center gap-2">
+                                <p:selectBooleanCheckbox id="rememberme" styleClass="w-auto" />
+                                <p:outputLabel for="@previous" styleClass="text-sm text-700" value="Remember me on this device?" />
+                            </div>
+                            <p:link href="#{request.contextPath}/auth/signup" styleClass="fontlight text-blue-500 text-right cursor-pointer text-sm" value="Forgot password?"></p:link>
+                        </div>
+
+                        <div>
+                            <p:commandButton ajax="#{false}" value="Sign In" icon="pi pi-user" styleClass="w-full" />
+                            <span class="block my-1 text-center text-600 text-sm">or</span>
+                            <p:button href="#{request.contextPath}/auth/signup" value="Signup Now!" icon="pi pi-shopping-bag" styleClass="w-full no-outline surface-border border-1 text-color ui-button-flat" />
+                        </div>
+                    </div>
+                </h:form>
+            </p:outputPanel>
+            
+        </main>            
+        
+    </h:body>
+</html>

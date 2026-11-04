@@ -1,0 +1,13 @@
+* {
+	box:sizing: border-box;
+}
+body {
+	margin: 0;
+	padding: 0;
+}
+.search-box.ui-inputfield.ui-state-focus {
+	box-shadow: none;
+}
+.catalog.ui-dataview .ui-dataview-header {
+	display: none;
+}

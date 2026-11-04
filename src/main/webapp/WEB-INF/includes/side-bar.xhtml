@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" 
+	xmlns:ui="jakarta.faces.facelets"
+	xmlns:p="primefaces">
+	
+	<h:outputStylesheet library="css" name="sidebar.css" />
+	<h:outputScript library="js" name="sidebar.js" />
+	
+	<p:confirmDialog global="#{true}" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"
+                         icon="pi pi-times"/>
+        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+    </p:confirmDialog>
+	
+	<aside class="sidebar fixed h-screen surface-card z-1">
+	    <header class="sidebar-header">
+	      <a href="#" class="header-logo">
+	        <p:graphicImage library="images" name="logo.png" alt="Jebus bank" />
+	      </a>
+	      <p:button href="#{request.contextPath}/bank/account/open" value="Open" icon="pi pi-user-plus" 
+	      	styleClass="ui-button-outlined raised-button">
+	      	<p:tooltip for="@parent" value="Open account" position="bottom" />
+		</p:button>
+	      <button class="toggler menu-toggler">
+	        <i class="pi pi-bars text-xl" />
+	      </button>
+	    </header>
+	    
+	    <nav class="sidebar-nav">
+			<ul class="nav-list primary-nav">
+				<li class="nav-item">
+					<p:link href="#{request.contextPath}/bank/home" styleClass="nav-link no-underline">
+						<i class="nav-icon pi pi-home text-2xl" />
+		            	<span class="nav-label">Dashboard</span>
+					</p:link>
+		          	<span class="nav-tooltip">dashboard</span>
+				</li>
+				<li class="nav-item">
+					<p:link href="#{request.contextPath}/bank/account/list" styleClass="nav-link no-underline">
+						<i class="nav-icon pi pi-users text-2xl" />
+		            	<span class="nav-label">Accounts</span>
+					</p:link>
+		          	<span class="nav-tooltip">Accounts</span>
+				</li>
+				<li class="nav-item">
+					<p:link href="#{request.contextPath}/bank/account/deposit" styleClass="nav-link no-underline">
+						<i class="nav-icon pi pi-arrow-down-left text-2xl"/>
+		            	<span class="nav-label">Deposit</span>
+					</p:link>
+		          	<span class="nav-tooltip">Deposit</span>
+				</li>
+				<li class="nav-item">
+					<p:link href="#{request.contextPath}/bank/account/withdraw" styleClass="nav-link no-underline">
+						<i class="nav-icon pi pi-arrow-up-right text-2xl" />
+		            	<span class="nav-label">Withdrawal</span>
+					</p:link>
+		          	<span class="nav-tooltip">Withdrawal</span>
+				</li>
+				<li class="nav-item">
+					<p:link href="#{request.contextPath}/bank/account/transfer" styleClass="nav-link no-underline">
+						<i class="nav-icon pi pi-sync text-2xl" />
+		            	<span class="nav-label">Transfer</span>
+					</p:link>
+		          	<span class="nav-tooltip">Transfer</span>
+				</li>
+			</ul>
+
+			<ul class="nav-list secondary-nav">
+				<li class="nav-item">
+					<p:link href="#{request.contextPath}/bank/profile" styleClass="nav-link no-underline"> 
+						<i class="nav-icon pi pi-user text-2xl" /> 
+						<span class="nav-label">Profile</span>
+					</p:link> 
+					<span class="nav-tooltip">Profile</span>
+				</li>
+				<li class="nav-item">
+					<h:form>
+						<p:commandLink ajax="#{false}" styleClass="nav-link no-underline" action="#{profileBean.logout}"> 
+							<i class="nav-icon pi pi-sign-out text-2xl" /> 
+							<span class="nav-label">Logout</span>
+							<p:confirm header="Confirmation"
+		                       message="Do you want to signout of this application?"
+		                       icon="pi pi-info-circle"
+		                       yesButtonLabel="logout!"
+		                       yesButtonClass="bg-red-600 text-white"
+		                       yesButtonIcon="pi pi-sign-out"
+		                       noButtonLabel="remain!"
+		                       noButtonClass="bg-green-600 text-white"
+		                       noButtonIcon="pi pi-heart"/>
+						</p:commandLink> 
+						<span class="nav-tooltip">Logout</span>
+					</h:form>
+				</li>
+			</ul>
+		</nav>
+     </aside>
+     <script>
+     	$(document).ready(() => {
+     		const jebusSidebar = new JebusSidebar();
+     		jebusSidebar.init();
+     	});
+     </script>
+	
+</ui:composition>

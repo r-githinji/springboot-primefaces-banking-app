@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" 
+	xmlns:ui="jakarta.faces.facelets"
+	xmlns:p="primefaces">
+	
+	<h:outputStylesheet library="css" name="topbar.css" />
+	
+	<nav class="surface-card py-3 sticky top-0 z-2">
+		<p:outputPanel styleClass="flex justify-content-between align-items-center px-2 lg:mb-1 mb-0">
+			<span class="text-lg font-bold">JEBUS BANK</span>		
+			<h:outputFormat value="Welcome, {0}" styleClass="text-xs font-light italic lg:block hidden">
+				<f:param value="#{profileBean.user.name}" />
+			</h:outputFormat>
+			<p:commandButton type="button" styleClass="ui-button-flat rounded-button lg:hidden block text-color" icon="pi pi-ellipsis-v"
+				onclick="(() => $('#dropdown').toggleClass('hidden'))()">
+			</p:commandButton>
+		</p:outputPanel>
+		
+		<ul id="dropdown" class="list-none p-0 m-0 lg:flex lg:align-items-center lg:justify-content-end select-none lg:flex-row surface-section border-1 lg:border-none surface-border right-0 top-100 z-1 shadow-2 lg:shadow-none absolute lg:static hidden">
+            <li>
+                <a class="flex p-3 lg:px-3 lg:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-duration-150 transition-colors">
+                    <i class="pi pi-inbox text-base lg:text-2xl mr-2 lg:mr-0"></i>
+                    <span class="block lg:hidden font-medium">Inbox</span>
+                </a>
+            </li>
+            <li>
+                <a class="flex p-3 lg:px-3 lg:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-duration-150 transition-colors">
+                    <i class="pi pi-bell text-base lg:text-2xl mr-2 lg:mr-0"></i>
+                    <span class="block lg:hidden font-medium">Notifications</span>
+                </a>
+            </li>
+            <li class="border-top-1 surface-border lg:border-top-none hidden">
+                <a href="#{request.contextPath}/bank/profile" class="flex p-3 lg:px-3 lg:py-2 align-items-center hover:surface-100 font-medium border-round cursor-pointer transition-duration-150 transition-colors text-600">
+                	<i class="pi pi-user text-base lg:text-2xl mr-2 lg:mr-0"></i>
+                    <span class="block lg:hidden">
+                        <span class="block text-900 font-medium">#{profileBean.user.name}</span>
+                        <ui:repeat value="#{profukeBean.user.roles}" var="role" varStatus="roleStatus">
+                        	<span class="text-600 font-medium text-sm">#{role.type.label}</span>
+                        	<p:outputPanel layout="inline" rendered="#{not roleStatus.last}">,</p:outputPanel>
+                        </ui:repeat>
+                    </span>
+                </a>
+            </li>
+        </ul>
+	</nav>
+	
+</ui:composition>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" 
+	xmlns:ui="jakarta.faces.facelets"
+	xmlns:p="primefaces">
+	<h:head>
+		<title>
+			<ui:insert name="dialog-title" />
+		</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="mobile-web-app-capable" content="yes" />
+		<link rel="icon" />
+	</h:head>
+	<h:body styleClass="m-0 p-0 overflow-hidden">
+	
+		<h:outputStylesheet library="webjars" name="primeflex/3.2.0/primeflex.min.css" />	
+				
+		<ui:insert name="dialog-content" />
+		
+	</h:body>
+</html>
