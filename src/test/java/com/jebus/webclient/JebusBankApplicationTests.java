@@ -56,7 +56,7 @@ class JebusBankApplicationTests {
 		Customer target = custSvc.create();
 		target.setFirstName("Target");
 		target.setLastName("Customer");
-		target.setPhoneNumber("0725362637");
+		target.setPhoneNumber("0725***637");
 		target.setEmail("target.customer@gmail.com");
 		target.setBirthDate(LocalDate.of(1972, 3, 25));
 		target = custSvc.create(target);
