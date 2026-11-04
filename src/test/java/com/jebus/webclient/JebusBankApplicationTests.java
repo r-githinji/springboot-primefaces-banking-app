@@ -40,11 +40,11 @@ class JebusBankApplicationTests {
 		Customer bank = custSvc.findByReference("JEBUS-001");
 		
 		Customer customer = custSvc.create();
-		customer.setFirstName("Roy");
-		customer.setLastName("Githinji");
-		customer.setPhoneNumber("0724786022");
-		customer.setEmail("roy.githinji@gmail.com");
-		customer.setBirthDate(LocalDate.of(1988, 6, 1));		
+		customer.setFirstName("Source");
+		customer.setLastName("Customer");
+		customer.setPhoneNumber("0752***019");
+		customer.setEmail("source.customer@gmail.com");
+		customer.setBirthDate(LocalDate.of(1998, 3, 17));		
 		customer = custSvc.create(customer);
 		
 		deposit(customer, 100d);
